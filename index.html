@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#070a0d" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <title>BLACKSITE PROTOCOL — Tactical FPS</title>
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body>
+  <div id="game-root">
+    <canvas id="game-canvas"></canvas>
+    <div class="fx-grain" aria-hidden="true"></div>
+    <div class="fx-vignette" aria-hidden="true"></div>
+    <div id="damage-flash" aria-hidden="true"></div>
+    <div id="hurt-direction" aria-hidden="true"></div>
+
+    <!-- ================= MAIN MENU ================= -->
+    <section id="main-menu" class="menu-shell">
+      <header class="topbar">
+        <div class="brand">
+          <span class="brand-mark">
+            <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 2 29 9.5v13L16 30 3 22.5v-13L16 2Z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M16 7.5 24 12v8l-8 4.5-8-4.5v-8l8-4.5Z" fill="none" stroke="currentColor" stroke-width="1"/><path d="m16 11 4 2.3v4.2l-4 2.3-4-2.3v-4.2L16 11Z" fill="currentColor"/></svg>
+          </span>
+          <span class="brand-copy"><b>NIGHTFALL</b><small>DIVISION // TACTICAL OPS</small></span>
+        </div>
+        <div class="topbar-right">
+          <div class="net-status"><i></i><span>SECURE UPLINK</span><b>04:17:32</b></div>
+          <button class="icon-btn" id="menu-audio" aria-label="Toggle sound">
+            <svg class="icon-on" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4Zm12.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4Z" fill="currentColor"/><path d="M14 2.2v2.1a8 8 0 0 1 0 15.4v2.1a10 10 0 0 0 0-19.6Z" fill="currentColor" opacity=".5"/></svg>
+            <svg class="icon-off" viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4Zm12.6 1.1L15.2 12l1.4 1.4 1.4-1.4 1.4 1.4 1.4-1.4L19.4 12l-1.4-1.4-1.4 1.4-1.4-1.4-1.4 1.4Z" fill="currentColor"/><path d="m16.6 16.2 1.4-1.4-1.4-1.4 1.4-1.4 1.4 1.4 1.4-1.4 1.4 1.4-5.6 5.6-1.4-1.4Z" fill="currentColor" opacity=".6"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <div class="menu-main">
+        <div class="hero-copy">
+          <div class="eyebrow"><span class="eyebrow-line"></span> OPERATION NIGHTFALL <b>// 07</b></div>
+          <h1>BLACK<span>SITE</span></h1>
+          <div class="hero-sub"><b>PROTOCOL</b><span>TACTICAL FPS</span></div>
+          <p class="mission-copy">A rogue cell has seized the abandoned relay station.<br/>Move in. Clear the compound. Leave no one standing.</p>
+          <div class="hero-actions">
+            <button id="deploy-btn" class="primary-btn">
+              <span class="btn-glow"></span>
+              <span class="btn-icon"><svg viewBox="0 0 24 24"><path d="m8 5 11 7-11 7V5Z" fill="currentColor"/></svg></span>
+              <span class="btn-copy"><b>DEPLOY</b><small>ENTER THE BLACKSITE</small></span>
+              <span class="btn-arrow">↗</span>
+            </button>
+            <button id="brief-btn" class="ghost-btn">
+              <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Zm0 16a7 7 0 1 1 0-14 7 7 0 0 1 0 14Zm1-11h-2v5l4 2 1-1.7-3-1.8V8Z" fill="currentColor"/></svg>
+              <span>MISSION BRIEF</span>
+            </button>
+          </div>
+          <div class="menu-meta">
+            <div><small>MODE</small><b>ASSAULT</b></div>
+            <div><small>TIME</small><b>NIGHT / 02:40</b></div>
+            <div><small>INPUT</small><b id="input-label">KEYBOARD + MOUSE</b></div>
+          </div>
+        </div>
+
+        <aside class="dossier">
+          <div class="dossier-head">
+            <span><i></i> MISSION DOSSIER</span>
+            <b>CLASSIFIED</b>
+          </div>
+          <div class="dossier-map">
+            <div class="map-grid"></div>
+            <svg class="map-lines" viewBox="0 0 240 166" preserveAspectRatio="none">
+              <path d="M18 123 48 91l37 8 15-41 36 10 18 36 44-20 24 31" fill="none" stroke="rgba(255,161,71,.45)" stroke-width="1.4" stroke-dasharray="4 5"/>
+              <circle cx="48" cy="91" r="22" fill="none" stroke="rgba(255,161,71,.2)" stroke-width="1"/>
+              <circle cx="48" cy="91" r="4" fill="#ff9b3d"/>
+              <circle cx="153" cy="104" r="3" fill="#fff"/>
+              <path d="M40 66h62v50H40zM130 46h66v42h-66z" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.11)"/>
+              <path d="M62 30v-9m0 126v-9M28 53h-9m171 0h-9" stroke="rgba(255,255,255,.2)"/>
+            </svg>
+            <span class="map-tag tag-a">ALPHA</span>
+            <span class="map-tag tag-b">B-04</span>
+            <span class="map-coord">34°07'12"N<br/>118°14'08"W</span>
+            <div class="map-scan"></div>
+          </div>
+          <div class="dossier-body">
+            <div class="objective-row"><span>01</span><div><b>INFILTRATE THE RELAY</b><small>Reach the central compound</small></div><i class="done"></i></div>
+            <div class="objective-row"><span>02</span><div><b>ELIMINATE HOSTILES</b><small>Clear all three assault waves</small></div><i></i></div>
+            <div class="objective-row"><span>03</span><div><b>HOLD THE SITE</b><small>Survive and secure the uplink</small></div><i></i></div>
+          </div>
+          <div class="dossier-foot">
+            <span>THREAT LEVEL</span><b>SEVERE <em></em><em></em><em></em><em class="off"></em><em class="off"></em></b>
+          </div>
+        </aside>
+      </div>
+
+      <footer class="menu-footer">
+        <div class="control-legend">
+          <span class="legend-title">FIELD MANUAL</span>
+          <div><kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd><small>MOVE</small></div>
+          <div><kbd class="wide">MOUSE</kbd><small>AIM</small></div>
+          <div><kbd class="wide">LMB</kbd><small>FIRE</small></div>
+          <div><kbd>R</kbd><small>RELOAD</small></div>
+          <div><kbd>⇧</kbd><small>SPRINT</small></div>
+        </div>
+        <div class="build-tag"><span>WEBGL</span><i></i><span>60 FPS</span><i></i><span>TOUCH READY</span><b>v1.0.7</b></div>
+      </footer>
+    </section>
+
+    <!-- ================= BRIEFING ================= -->
+    <section id="briefing" class="modal-shell hidden" aria-hidden="true">
+      <div class="brief-card">
+        <button class="close-btn" id="brief-close" aria-label="Close briefing">×</button>
+        <div class="brief-kicker">MISSION BRIEF // OPERATION NIGHTFALL</div>
+        <h2>THE RELAY IS <span>COMPROMISED.</span></h2>
+        <p>At 02:40 local time, a rogue cell cut the uplink at Relay Blacksite 07. Satellite intel confirms three armed waves inside the compound. You are the only asset on the ground.</p>
+        <div class="brief-grid">
+          <div><small>PRIMARY</small><b>Clear all hostiles</b><span>Three waves. No reinforcements.</span></div>
+          <div><small>SECONDARY</small><b>Protect the relay</b><span>Keep structural damage low.</span></div>
+          <div><small>LOADOUT</small><b>VXR-7 Assault Rifle</b><span>30 rounds · full auto</span></div>
+        </div>
+        <div class="brief-controls">
+          <span><kbd>WASD</kbd> MOVE</span><span><kbd>MOUSE</kbd> AIM</span><span><kbd>LMB</kbd> FIRE</span><span><kbd>R</kbd> RELOAD</span><span><kbd>SHIFT</kbd> SPRINT</span>
+        </div>
+        <button class="primary-btn thin" id="brief-deploy"><span class="btn-copy"><b>BEGIN OPERATION</b><small>DEPLOY TO BLACKSITE 07</small></span><span class="btn-arrow">↗</span></button>
+      </div>
+    </section>
+
+    <!-- ================= HUD ================= -->
+    <section id="hud" class="hud hidden" aria-hidden="true">
+      <div class="hud-top">
+        <div class="objective-panel">
+          <div class="panel-cut"></div>
+          <div class="obj-head"><span class="live-dot"></span> LIVE OPERATION <b id="hud-timer">00:00</b></div>
+          <div class="obj-title">ELIMINATE HOSTILES</div>
+          <div class="obj-progress"><div id="wave-bar"></div></div>
+          <div class="obj-sub"><span id="wave-label">WAVE 1 / 3</span><span id="enemies-left">4 HOSTILES REMAINING</span></div>
+        </div>
+
+        <div class="score-cluster">
+          <div class="wave-pips" id="wave-pips"><i class="active"></i><i></i><i></i></div>
+          <div class="score-value"><small>SCORE</small><b id="score">000000</b></div>
+          <div class="combo" id="combo">×1</div>
+        </div>
+
+        <div class="hud-right">
+          <div class="minimap-wrap">
+            <canvas id="minimap" width="152" height="152"></canvas>
+            <div class="minimap-ring"></div>
+            <span class="minimap-label">SECTOR 07</span>
+            <span class="minimap-n">N</span>
+          </div>
+          <div class="hud-buttons">
+            <button id="hud-audio" class="hud-icon" aria-label="Toggle audio"><svg viewBox="0 0 24 24"><path d="M4 9v6h4l5 4V5L8 9H4Zm11 1h6v2h-6v-2Z" fill="currentColor"/></svg></button>
+            <button id="pause-btn" class="hud-icon" aria-label="Pause"><svg viewBox="0 0 24 24"><path d="M7 5h4v14H7V5Zm6 0h4v14h-4V5Z" fill="currentColor"/></svg></button>
+          </div>
+        </div>
+      </div>
+
+      <div id="crosshair" class="crosshair">
+        <i class="ch-top"></i><i class="ch-right"></i><i class="ch-bottom"></i><i class="ch-left"></i><b></b>
+        <div class="hitmarker"><i></i><i></i><i></i><i></i></div>
+      </div>
+
+      <div id="wave-banner" class="wave-banner">
+        <div class="wb-line"></div>
+        <small id="wb-kicker">HOSTILES INBOUND</small>
+        <b id="wb-title">WAVE 01</b>
+        <span id="wb-sub">CLEAR THE COMPOUND</span>
+        <div class="wb-line"></div>
+      </div>
+
+      <div id="kill-feed" class="kill-feed"></div>
+      <div id="pickup-toast" class="pickup-toast"><b>SUPPLY CACHE</b><span>+25 HEALTH</span></div>
+      <div id="low-ammo" class="low-ammo">RELOAD <b>R</b></div>
+
+      <div class="hud-bottom">
+        <div class="vitals-panel glass">
+          <div class="operator-chip"><span>07</span><div><small>OPERATOR</small><b>REAPER</b></div><i class="online"></i></div>
+          <div class="vital-row">
+            <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.6-7 10-7 10Z" fill="currentColor"/></svg>
+            <div><span>HEALTH <b id="health-val">100</b></span><div class="bar"><i id="health-bar"></i></div></div>
+          </div>
+          <div class="vital-row armor">
+            <svg viewBox="0 0 24 24"><path d="m12 2 8 3v6c0 5.5-3.4 9.4-8 11-4.6-1.6-8-5.5-8-11V5l8-3Z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="m12 6 4 1.6V12c0 3.4-2 5.8-4 6.8-2-1-4-3.4-4-6.8V7.6L12 6Z" fill="currentColor"/></svg>
+            <div><span>ARMOR <b id="armor-val">50</b></span><div class="bar"><i id="armor-bar"></i></div></div>
+          </div>
+          <div class="vitals-spike" id="vitals-spike"></div>
+        </div>
+
+        <div class="weapon-panel glass">
+          <div class="weapon-top">
+            <span class="weapon-class">PRIMARY // ASSAULT</span>
+            <span class="fire-mode"><i></i> AUTO</span>
+          </div>
+          <div class="weapon-name">VXR<span>-7</span></div>
+          <div class="ammo-row">
+            <div class="ammo"><b id="ammo-val">30</b><span>/ <em id="reserve-val">120</em></span></div>
+            <div class="reload-viz"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="20" class="ring-bg"/><circle cx="24" cy="24" r="20" class="ring-fill" id="reload-ring"/></svg><span>R</span></div>
+          </div>
+          <div class="ammo-ticks" id="ammo-ticks"></div>
+        </div>
+      </div>
+
+      <div id="hit-flash"></div>
+      <div id="mobile-ui" class="mobile-ui">
+        <div id="joystick" class="joystick"><div class="js-ring"></div><div class="js-knob" id="js-knob"></div><span>MOVE</span></div>
+        <div id="look-zone" class="look-zone"><span>DRAG TO AIM</span></div>
+        <button id="fire-btn" class="fire-btn" aria-label="Fire"><span class="fire-ring"></span><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M24 6v8M24 34v8M6 24h8M34 24h8" stroke="currentColor" stroke-width="2"/><circle cx="24" cy="24" r="2.4" fill="currentColor"/></svg><b>FIRE</b></button>
+        <button id="reload-btn" class="round-btn" aria-label="Reload"><svg viewBox="0 0 24 24"><path d="M12 4a8 8 0 1 1-7.4 5M4 3v6h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span>RELOAD</span></button>
+        <button id="jump-btn" class="round-btn small" aria-label="Jump"><svg viewBox="0 0 24 24"><path d="m12 4 6 6h-4v8h-4v-8H6l6-6Z" fill="currentColor"/></svg><span>JUMP</span></button>
+        <button id="crouch-btn" class="round-btn small" aria-label="Crouch"><svg viewBox="0 0 24 24"><path d="m12 20-6-6h4V6h4v8h4l-6 6Z" fill="currentColor"/></svg><span>CROUCH</span></button>
+      </div>
+    </section>
+
+    <!-- ================= PAUSE ================= -->
+    <section id="pause-menu" class="modal-shell hidden" aria-hidden="true">
+      <div class="pause-card">
+        <div class="brief-kicker">OPERATION SUSPENDED</div>
+        <h2>TACTICAL <span>PAUSE</span></h2>
+        <p class="pause-sub">The compound is holding. Re-engage when ready.</p>
+        <div class="pause-stats">
+          <div><small>SCORE</small><b id="pause-score">0</b></div>
+          <div><small>ACCURACY</small><b id="pause-acc">0%</b></div>
+          <div><small>WAVE</small><b id="pause-wave">1 / 3</b></div>
+        </div>
+        <button class="primary-btn thin" id="resume-btn"><span class="btn-copy"><b>RESUME OPERATION</b><small>RETURN TO THE FIGHT</small></span><span class="btn-arrow">↗</span></button>
+        <button class="text-btn" id="restart-btn">RESTART MISSION</button>
+        <button class="text-btn muted" id="abort-btn">ABORT TO MAIN MENU</button>
+      </div>
+    </section>
+
+    <!-- ================= RESULT ================= -->
+    <section id="result-screen" class="modal-shell hidden" aria-hidden="true">
+      <div class="result-card">
+        <div class="result-kicker" id="result-kicker">OPERATION COMPLETE</div>
+        <h2 id="result-title">SITE <span>SECURED</span></h2>
+        <p id="result-copy">All hostile forces eliminated. The relay is back online. Good work, Operator.</p>
+        <div class="result-stats">
+          <div><small>FINAL SCORE</small><b id="result-score">000000</b></div>
+          <div><small>ACCURACY</small><b id="result-acc">0%</b></div>
+          <div><small>KILLS</small><b id="result-kills">0</b></div>
+          <div><small>TIME</small><b id="result-time">00:00</b></div>
+        </div>
+        <div class="rank-line"><span>COMBAT RATING</span><b id="result-rank">S</b><div id="rank-stars">★★★★★</div></div>
+        <div class="result-actions">
+          <button class="primary-btn thin" id="retry-btn"><span class="btn-copy"><b>REDEPLOY</b><small>RUN IT AGAIN</small></span><span class="btn-arrow">↗</span></button>
+          <button class="ghost-btn" id="menu-btn"><span>MAIN MENU</span></button>
+        </div>
+      </div>
+    </section>
+
+    <div id="fade" class="fade"></div>
+    <div id="rotate-hint" class="rotate-hint">
+      <svg viewBox="0 0 48 48"><rect x="14" y="7" width="20" height="34" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 37h8" stroke="currentColor" stroke-width="2"/></svg>
+      <b>ROTATE YOUR DEVICE</b><span>For the full tactical experience</span>
+    </div>
+    <div id="boot-error" class="boot-error hidden"></div>
+  </div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
